@@ -68,6 +68,36 @@ const DATA = [
     textStyle: {
       color: '#FFFFFF',  
     }
+  },
+  {
+    id: 'button5',
+    title: 'Fifth Button',
+    buttonStyle: { 
+      backgroundColor: '#00bdb0'
+    },
+    textStyle: {
+      color: '#4b5958',  
+    }
+  },
+  {
+    id: 'button6',
+    title: 'Sixth Button',
+    buttonStyle: { 
+      backgroundColor: '#e000f5'
+    },
+    textStyle: {
+      color: '#eac2ed',  
+    }
+  },
+  {
+    id: 'button7',
+    title: 'Seventh Button',
+    buttonStyle: { 
+      backgroundColor: '#eeff00'
+    },
+    textStyle: {
+      color: '#0022ff',  
+    }
   }
 ];
 
@@ -103,13 +133,13 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
+    padding: 15,
+    marginVertical: 3,
     marginHorizontal: 16,
   },
   button: {
-    padding: 20,
-    marginVertical: 8,
+    padding: 15,
+    marginVertical: 3,
     marginHorizontal: 16,
   },
   buttonText : {
