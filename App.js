@@ -28,27 +28,57 @@ const DATA = [
   {
     id: 'button1',
     title: 'First Button',
-    buttonStyle: { backgroundColor: '#f9c2ff' },
+    buttonStyle: {
+      backgroundColor: '#f9c2ff',
+      borderRadius: 30,         
+  },
+    textStyle: {
+      color: '#FFFFFF',  
+    }
   },
   {
     id: 'button2',
     title: 'Second Button',
-    buttonStyle: { backgroundColor:'#324ca8' },
+    buttonStyle: { 
+      backgroundColor:'#324ca8',
+      borderColor: "#000000",
+      borderStyle: "solid",
+      borderWidth: 5
+    },
+    textStyle: {
+      color: '#bd4500',  
+    }
   },
   {
     id: 'button3',
     title: 'Third Button',
-    buttonStyle: { backgroundColor:'#820007' },
+    buttonStyle: { 
+      backgroundColor:'#820007' 
+    },
+    textStyle: {
+      color: '#00bd4b',  
+    }
   },
+  {
+    id: 'button4',
+    title: 'Fourth Button',
+    buttonStyle: { 
+      backgroundColor: '#000000'
+    },
+    textStyle: {
+      color: '#FFFFFF',  
+    }
+  }
 ];
 
-const Item = ({title, buttonStyle}) => (
+const Item = ({title, buttonStyle, textStyle}) => (
   <View>
     {/* <Text style={styles.title}>{title}</Text> */}
     <CustomButton 
           title={title}
           onPress={() => Alert.alert(title)}
           buttonStyle={buttonStyle}
+          textStyle={textStyle}
           />
   </View>
 );
@@ -58,7 +88,7 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={DATA}
-        renderItem={({item}) => <Item title={item.title} buttonStyle={item.buttonStyle} />}
+        renderItem={({item}) => <Item title={item.title} buttonStyle={item.buttonStyle} textStyle={item.textStyle}/>}
         keyExtractor={item => item.id}
       />
 
@@ -84,7 +114,6 @@ const styles = StyleSheet.create({
   },
   buttonText : {
     fontSize: 32,
-    color: '#FFFFFF',
     textAlign: 'center',
   },
   title: {
