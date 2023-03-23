@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -9,7 +9,11 @@ import {
   StatusBar,
   Alert,
   TouchableOpacity,
+  Dimensions,
+  requireNativeComponent,
 } from 'react-native';
+
+import { WebView} from 'react-native-webview';
 
 const CustomButton = ({ title, onPress, buttonStyle, textStyle }) => {
   return (
@@ -101,27 +105,97 @@ const DATA = [
   }
 ];
 
-const Item = ({title, buttonStyle, textStyle}) => (
-  <View>
-    {/* <Text style={styles.title}>{title}</Text> */}
-    <CustomButton 
-          title={title}
-          onPress={() => Alert.alert(title)}
-          buttonStyle={buttonStyle}
-          textStyle={textStyle}
-          />
-  </View>
-);
+const links = [
+  {
+    id: 'north-america',
+    title: 'North America',
+    url: 'https://en.wikipedia.org/wiki/North_America',
+  },
+  {
+    id: 'south-america',
+    title: 'South America',
+    url: 'https://en.wikipedia.org/wiki/South_America',
+  },
+  {
+    id: 'europe',
+    title: 'Europe',
+    url: 'https://en.wikipedia.org/wiki/Europe',
+  },
+  {
+    id: 'asia',
+    title: 'Asia',
+    url: 'https://en.wikipedia.org/wiki/Asia',
+  },
+  {
+    id: 'africa',
+    title: 'Africa',
+    url: 'https://en.wikipedia.org/wiki/Africa',
+  },
+  {
+    id: 'australia',
+    title: 'Australia',
+    url: 'https://en.wikipedia.org/wiki/Australia_(continent)',
+  },
+  {
+    id: 'antarctica',
+    title: 'Antarctica',
+    url: 'https://en.wikipedia.org/wiki/Antarctica',
+  },
+];
+
+
+// const Item = ({title, buttonStyle, textStyle}) => (
+//   <View>
+//     <CustomButton 
+//           title={title}
+//           onPress={() => Alert.alert(title)}
+//           buttonStyle={buttonStyle}
+//           textStyle={textStyle}
+//           />
+//   </View>
+// );
+
+// const App = () => {
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <FlatList
+//         data={DATA}
+//         renderItem={({item}) => <Item title={item.title} buttonStyle={item.buttonStyle} textStyle={item.textStyle}/>}
+//         keyExtractor={item => item.id}
+//       />
+
+//     </SafeAreaView>
+//   );
+// };
 
 const App = () => {
+  const [selectedLink, setSelectedLink] = useState(null);
+
+  const handleButtonPress = (link) => {
+    setSelectedLink(link);
+  };
+
+  const renderLink = ({ item }) => (
+    <CustomButton
+      title={item.title}
+      onPress={() => handleButtonPress(item)}
+      buttonStyle={styles.linkButton}
+      textStyle={styles.linkButtonText}
+    />
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
-        renderItem={({item}) => <Item title={item.title} buttonStyle={item.buttonStyle} textStyle={item.textStyle}/>}
-        keyExtractor={item => item.id}
+        data={links}
+        renderItem={renderLink}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
       />
 
+      {selectedLink && (
+        <WebView source={{ uri: selectedLink.url }} style={styles.webView} />
+      )}
     </SafeAreaView>
   );
 };
@@ -150,6 +224,5 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
-
 
 export default App;
